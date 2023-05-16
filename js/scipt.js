@@ -41,7 +41,7 @@ window.addEventListener("load", function (e) {
 
         .showGlobe(true)
         .backgroundColor("rgba(0,0,0,0)")
-        .globeImageUrl("../media/bg.webp")
+        .globeImageUrl("media/bg.webp")
 //         .globeImageUrl("bg-blue.png")
         .width(containerWidth)
         .height(containerHeight)

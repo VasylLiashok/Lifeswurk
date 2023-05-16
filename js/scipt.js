@@ -41,8 +41,8 @@ window.addEventListener("load", function (e) {
 
         .showGlobe(true)
         .backgroundColor("rgba(0,0,0,0)")
-        .globeImageUrl("../media/bg-blue.png")
-
+//         .globeImageUrl("../media/bg-blue.png")
+        .globeImageUrl("bg-blue.png")
         .width(containerWidth)
         .height(containerHeight)
         .showAtmosphere(true)

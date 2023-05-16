@@ -1,0 +1,305 @@
+<html lang="en">
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link rel="preload" href="css/style.css" as="style" />
+    <link rel="stylesheet" href="css/style.css" data-n-g="" />
+    <script defer src="js/d3.min.js"></script>
+
+    <script defer src="js/globe.gl.js"></script>
+  </head>
+  <body>
+    <section class="main">
+      <section class="main-info">
+        <div class="main-info__header">
+          <div class="main-info__image">
+            <img src="media/flag.svg" alt="flag" />
+          </div>
+          <div class="main-info__country">United Kingdom</div>
+        </div>
+        <div class="main-info__counters">
+          <div class="main-info__counter counter-item counter-item--dark">
+            <div class="counter-item__label">People count:</div>
+            <div class="counter-item__value">100</div>
+          </div>
+          <div class="main-info__counter counter-item counter-item--dark">
+            <div class="counter-item__label">Business count:</div>
+            <div class="counter-item__value">5</div>
+          </div>
+        </div>
+        <div class="main-info__block main-info__block--occupation">
+          <div class="main-info__subtitle">Occupation</div>
+          <div class="main-info__counters">
+            <div class="main-info__counter counter-item counter-item--green">
+              <div class="counter-item__label">1<sup>st</sup></div>
+              <div class="counter-item__value">Education and Training</div>
+            </div>
+            <div class="main-info__counter counter-item counter-item--green">
+              <div class="counter-item__label">2<sup>st</sup></div>
+              <div class="counter-item__value">Mental health</div>
+            </div>
+            <div class="main-info__counter counter-item counter-item--green">
+              <div class="counter-item__label">3<sup>st</sup></div>
+              <div class="counter-item__value">Criminal Legal Aid</div>
+            </div>
+            <div class="main-info__counter counter-item counter-item--green">
+              <div class="counter-item__label">4<sup>st</sup></div>
+              <div class="counter-item__value">Justice</div>
+            </div>
+            <div class="main-info__counter counter-item counter-item--green">
+              <div class="counter-item__label">5<sup>st</sup></div>
+              <div class="counter-item__value">Criminal law</div>
+            </div>
+          </div>
+        </div>
+        <div class="main-info__block main-info__block--dogood">
+          <div class="main-info__subtitle">Do Good</div>
+          <div class="main-info__diagramm">
+            <div id="diagramm" class="diagramm"></div>
+          </div>
+        </div>
+        <div class="main-info__footer">
+          <div class="main-info__text">
+            Everyone deserves support - invite your netwurk to join us
+          </div>
+          <button type="submit" class="main-info__share">
+            Share Lifeswurk
+          </button>
+        </div>
+      </section>
+      <section class="main-globe">
+        <div class="main-globe__header">
+          <h2 class="main-globe__title">Thank you signing-up!</h2>
+          <div class="main-globe__subtitle">Check your email</div>
+          <p>
+            Is your nation ready for Lifeswurk? We need to get ready for June.
+          </p>
+        </div>
+        <div class="main-globe__decors">
+          <div class="main-globe__decor main-globe__decor--1">
+            <img src="media/star.png" alt="Star" />
+          </div>
+          <div class="main-globe__decor main-globe__decor--2">
+            <img src="media/star.png" alt="Star" />
+          </div>
+          <div class="main-globe__decor main-globe__decor--3">
+            <img src="media/star.png" alt="Star" />
+          </div>
+        </div>
+
+        <div id="__next"></div>
+      </section>
+    </section>
+
+    <script src="js/scipt.js"></script>
+    <script src="js/echarts.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      // var dom = document.getElementById("diagramm");
+
+      // var myChart = echarts.init(dom, null, {
+      //   renderer: "canvas",
+      //   useDirtyRect: false,
+      // });
+      // var app = {};
+
+      // var option;
+
+      // option = {
+      //   tooltip: {
+      //     trigger: "item",
+      //     valueFormatter: (value) => value + "%",
+      //     borderColor: "transparent",
+      //     className: "diagramm-tooltip",
+      //     padding: 4,
+      //     textStyle: {
+      //       fontSize: 8,
+      //       fontWeight: 700,
+      //     },
+      //   },
+      //   visualMap: {
+      //     show: false,
+      //     min: 0,
+      //     max: 100,
+      //     inRange: {
+      //       colorLightness: [0, 1],
+      //     },
+      //   },
+      //   series: [
+      //     {
+      //       type: "pie",
+
+      //       center: ["50%", "50%"],
+      //       data: [
+      //         { value: 30, name: "No Poverty" },
+      //         { value: 35, name: "No Hunger" },
+      //         { value: 40, name: "Good Health" },
+      //         { value: 62, name: "Quality Education" },
+      //         { value: 50, name: "Gender Equality" },
+      //         { value: 45, name: "Clean Water and Sanitation" },
+      //         { value: 48, name: "Renewable Energy" },
+      //         { value: 52, name: "Good Jobs and Economic Growth" },
+      //         { value: 45, name: "Innovation and Infrastructure" },
+      //         { value: 55, name: "Reduced Inequalities" },
+      //         { value: 21, name: "Sustainable cities " },
+      //         { value: 64, name: "Responsible Consumption" },
+      //         { value: 34, name: "Climate Action" },
+      //         { value: 24, name: "Life Below Water" },
+      //         { value: 45, name: "Life on Land" },
+      //         { value: 50, name: "Peace and Justice" },
+      //         { value: 38, name: "Partnership for the Goals" },
+      //       ].sort(function (a, b) {
+      //         return a.value - b.value;
+      //       }),
+      //       roseType: "radius",
+      //       label: {
+      //         color: "#474E67",
+      //         fontSize: 11,
+      //         fontSize: 24,
+      //         overflow: "break",
+      //         lineHeight: 16,
+      //       },
+      //       labelLine: {
+      //         lineStyle: {
+      //           color: "rgba(71, 78, 103, 0.2)",
+      //         },
+      //         smooth: 0.2,
+      //         length: 1,
+      //         length2: 10,
+      //       },
+      //       itemStyle: {
+      //         color: "#075985",
+      //         shadowBlur: 10,
+      //         shadowColor: "rgb(7, 89, 133, 0.5)",
+      //         shadowOffsetY: 5,
+      //         //   color: {
+      //         //     type: "linear",
+      //         //     x: 0,
+      //         //     y: 0,
+      //         //     x2: 1,
+      //         //     y2: 1,
+      //         //     colorStops: [
+      //         //       {
+      //         //         offset: 0,
+      //         //         color: "rgb(251, 118, 123)",
+      //         //       },
+      //         //       {
+      //         //         offset: 1,
+      //         //         color: "rgb(204, 46, 72)",
+      //         //       },
+      //         //     ],
+      //         //     global: true,
+      //         //   },
+      //       },
+      //       animationType: "scale",
+      //       animationEasing: "elasticOut",
+      //       animationDelay: function (idx) {
+      //         return Math.random() * 200;
+      //       },
+      //     },
+      //   ],
+      //   media: [
+      //     {
+      //       option: {
+      //         series: [
+      //           {
+      //             radius: [0, "90%"],
+      //             label: {
+      //               fontSize: 11,
+      //             },
+      //             labelLine: {
+      //               length: 0.1,
+      //               length2: 10,
+      //             },
+      //           },
+      //         ],
+      //       },
+      //     },
+      //     {
+      //       query: {
+      //         minAspectRatio: 1.4,
+      //       },
+      //       option: {
+      //         series: [
+      //           {
+      //             radius: [0, "75%"],
+      //             label: {
+      //               fontSize: 11,
+      //             },
+      //             labelLine: {
+      //               length: 10,
+      //               length2: 0.1,
+      //             },
+      //           },
+      //         ],
+      //       },
+      //     },
+      //     {
+      //       query: {
+      //         maxAspectRatio: 1.35,
+      //       },
+      //       option: {
+      //         series: [
+      //           {
+      //             radius: [0, "95%"],
+      //             label: {
+      //               fontSize: 11,
+      //             },
+      //             labelLine: {
+      //               length: 10,
+      //               length2: 0.1,
+      //             },
+      //           },
+      //         ],
+      //       },
+      //     },
+      //     {
+      //       query: {
+      //         maxWidth: 360,
+      //       },
+      //       option: {
+      //         series: [
+      //           {
+      //             radius: [0, "65%"],
+      //             label: {
+      //               fontSize: 9,
+      //             },
+      //             labelLine: {
+      //               length: 10,
+      //               length2: 0.1,
+      //             },
+      //           },
+      //         ],
+      //       },
+      //     },
+      //     //  {
+      //     //    query: {
+      //     //      maxWidth: 460,
+      //     //    },
+      //     //    option: {
+      //     //      series: [
+      //     //        {
+      //     //          radius: [0, "85%"],
+      //     //          label: {
+      //     //            fontSize: 8,
+      //     //          },
+      //     //          labelLine: {
+      //     //            length: 0.1,
+      //     //            length2: 0.1,
+      //     //          },
+      //     //        },
+      //     //      ],
+      //     //    },
+      //     //  },
+      //   ],
+      // };
+
+      // if (option && typeof option === "object") {
+      //   myChart.setOption(option);
+      // }
+
+      // window.addEventListener("resize", myChart.resize);
+    </script>
+  </body>
+</html>

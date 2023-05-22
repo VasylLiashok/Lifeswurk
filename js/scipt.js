@@ -1,14 +1,17 @@
 window.addEventListener("load", function (e) {
   // const colorScale = d3.scaleSequentialSqrt(d3.interpolateBlues).exponent(0.45);
-
-  const colorScale = d3.scaleSequentialSqrt(["#000", "#00AF77"]).exponent(0.35);
-
+  //Here you can change colors of surface
+  const colorScale = d3.scaleSequentialSqrt(["#000", "#00AF77"]).exponent(0.15);
+  /////////////////////////////////////////////////////////
   const getVal = (feat) =>
+    //Here defines on which property data and colors are build
     feat.properties.GDP_MD_EST / Math.max(1e5, feat.properties.POP_EST);
+  //////////////////////////////////////////////////////
 
   fetch("countries.geojson")
     .then((response) => response.json())
     .then((countries) => {
+      console.log(countries);
       const maxVal = Math.max(...countries.features.map(getVal));
       colorScale.domain([0, maxVal]);
       let piedataArray;
@@ -16,12 +19,12 @@ window.addEventListener("load", function (e) {
       const containerWidth = container.offsetWidth;
       const containerHeight = container.offsetHeight;
 
-      const htmlArray = [
-        function (lat, lng) {
-          let latitude = lat,
-            length = lng;
-        },
-      ];
+      // const htmlArray = [
+      //   function (lat, lng) {
+      //     let latitude = lat,
+      //       length = lng;
+      //   },
+      // ];
 
       //========================================================================================================================================================
       //========================================================================================================================================================
@@ -32,6 +35,8 @@ window.addEventListener("load", function (e) {
         .onGlobeReady(function () {
           var e = world.controls();
           (e.autoRotate = 0), (e.autoRotateSpeed = -0.25), (e.enableZoom = !1);
+          //Customize globe size
+          world.pointOfView({ altitude: 1.8 });
         })
         .lineHoverPrecision(0)
 
@@ -41,8 +46,9 @@ window.addEventListener("load", function (e) {
 
         .showGlobe(true)
         .backgroundColor("rgba(0,0,0,0)")
+        //Customize water surface colour (only image is acceptable)
         .globeImageUrl("media/bg.webp")
-//         .globeImageUrl("bg-blue.png")
+        //         .globeImageUrl("bg-blue.png")
         .width(containerWidth)
         .height(containerHeight)
         .showAtmosphere(true)
@@ -51,24 +57,25 @@ window.addEventListener("load", function (e) {
 
         .polygonAltitude(0.01)
         .polygonCapColor((feat) => colorScale(getVal(feat)))
-        .polygonSideColor(() => "rgba(255,255,255,255)")
+        //Customize sides of polygon
+        .polygonSideColor(() => "#55A6E7")
         .polygonStrokeColor(() => "#000")
-        .htmlElementsData(htmlArray)
-        .htmlLat("latitude")
-        .htmlLng("longitude")
-        .htmlElement(function () {
-          var e =
-              '\n            <div class="text-white">\n              <span class="">'.concat(
-                '<svg width="100%" height="100%" viewBox="-4 0 36 36" overflow="visible">\n    <path fill="#00AF77" d="M14,0 C21.732,0 28,5.641 28,12.6 C28,23.963 14,36 14,36 C14,36 0,24.064 0,12.6 C0,5.641 6.268,0 14,0 Z" stroke="transparent"></path>\n    <circle fill="white" cx="14" cy="14" r="7"></circle>\n  </svg>',
-                "</span>\n            </div>\n          "
-              ),
-            n = document.createElement("div");
-          const container = document.querySelector(".scene-container");
-          container.appendChild(n);
+        //   .htmlElementsData(htmlArray)
+        //   .htmlLat("latitude")
+        //   .htmlLng("longitude")
+        //   .htmlElement(function () {
+        //     var e =
+        //         '\n            <div class="text-white">\n              <span class="">'.concat(
+        //           '<svg width="100%" height="100%" viewBox="-4 0 36 36" overflow="visible">\n    <path fill="#00AF77" d="M14,0 C21.732,0 28,5.641 28,12.6 C28,23.963 14,36 14,36 C14,36 0,24.064 0,12.6 C0,5.641 6.268,0 14,0 Z" stroke="transparent"></path>\n    <circle fill="white" cx="14" cy="14" r="7"></circle>\n  </svg>',
+        //           "</span>\n            </div>\n          "
+        //         ),
+        //       n = document.createElement("div");
+        //     const container = document.querySelector(".scene-container");
+        //     container.appendChild(n);
 
-          return (n.innerHTML = e), n;
-        })
-        .htmlTransitionDuration(0)
+        //     return (n.innerHTML = e), n;
+        //   })
+        //   .htmlTransitionDuration(0)
 
         .onPolygonHover(function (polygon, prevPolygon) {
           world.polygonAltitude(newFunction(polygon));
@@ -78,27 +85,19 @@ window.addEventListener("load", function (e) {
           }
         })
         .onPolygonClick(function (polygon, e, coord) {
-          console.log(polygon);
+          //  const medlng = (polygon.bbox[0] + polygon.bbox[2]) / 2;
+          //  const medlat = (polygon.bbox[1] + polygon.bbox[3]) / 2;
 
-          const medlng = (polygon.bbox[0] + polygon.bbox[2]) / 2;
-          const medlat = (polygon.bbox[1] + polygon.bbox[3]) / 2;
-
-          console.log(medlat);
-          console.log(coord.lat);
           //
-          world
-            .polygonAltitude(newFunction(polygon))
-            .polygonCapColor((d) =>
-              d === polygon ? "#FF6A10" : colorScale(getVal(d))
-            );
+          world.polygonAltitude(newFunction(polygon)).polygonCapColor((d) =>
+            //Customize colour on click
+            d === polygon ? "#FF6A10" : colorScale(getVal(d))
+          );
           const lat = coord.lat,
             lng = coord.lng;
-          //  world.pointOfView({ lat, lng, altitude: 1.5 }, 1200);
-          //  world.htmlLat(lat);
-          //  world.htmlLng(lng);
           world.pointOfView({ lat, lng, altitude: 1.5 }, 1200);
-          world.htmlLat(medlat);
-          world.htmlLng(medlng);
+          //  world.htmlLat(medlat);
+          //  world.htmlLng(medlng);
           function newFunction(polygon) {
             return (d) => (d === polygon ? 0.03 : 0.01);
           }

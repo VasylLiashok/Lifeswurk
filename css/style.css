@@ -349,6 +349,9 @@ body {
   }
 }
 @media (max-width: 767.98px) {
+  .main-info {
+    padding: 1.5625rem 1rem;
+  }
   .main-globe__header {
     padding: 2.5rem 1.25rem 0.625rem;
     margin-bottom: 30px;
@@ -374,9 +377,6 @@ body {
 }
 
 @media (max-width: 479.98px) {
-  .main-info {
-    padding: 1.5625rem 1rem;
-  }
   .main-info__diagramm {
     margin: 0 -1rem;
   }

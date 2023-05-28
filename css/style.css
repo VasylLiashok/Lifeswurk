@@ -310,6 +310,16 @@ body {
   .main-globe__header {
     margin-bottom: 1rem;
   }
+  .main {
+    flex-direction: column-reverse;
+  }
+
+  .main-globe__wrapper {
+    padding-bottom: 100%;
+  }
+  .main-info__block--dogood {
+    margin-bottom: 1.5rem;
+  }
 }
 @media (max-width: 569.98px) {
   .diagramm {
@@ -325,17 +335,7 @@ body {
     left: -10%;
   }
 }
-@media (max-width: 991.98px) {
-  .main {
-    flex-direction: column;
-  }
-  .main-globe__wrapper {
-    padding-bottom: 100%;
-  }
-  .main-info__block--dogood {
-    margin-bottom: 1.5rem;
-  }
-}
+
 @media (max-width: 570.98px) {
   .main-globe__section {
     width: 130%;

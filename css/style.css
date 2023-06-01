@@ -138,7 +138,8 @@ body {
 }
 
 .main-globe {
-  background: linear-gradient(90deg, #fcfcfc 0%, #e1eeff 100%) !important;
+   background: url("../media/galaxy.png") center / cover no-repeat,
+    linear-gradient(90deg, #fcfcfc 0%, #e1eeff 100%);
   flex: 1 1 100%;
   position: relative;
   display: flex;
